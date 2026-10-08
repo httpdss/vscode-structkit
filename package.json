@@ -1,8 +1,8 @@
 {
-  "name": "vscode-struct",
+  "name": "vscode-structkit",
   "displayName": "StructKit",
   "description": "Official StructKit extension for VS Code and Cursor with schema validation and intelligent autocomplete",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "publisher": "kennethbelitzky",
   "engines": {
     "vscode": "^1.74.0"
@@ -14,11 +14,45 @@
   ],
   "activationEvents": [
     "onLanguage:yaml",
+    "workspaceContains:**/.structkit.yaml",
+    "workspaceContains:**/*.structkit.yaml",
     "workspaceContains:**/.struct.yaml",
     "workspaceContains:**/*.struct.yaml"
   ],
   "main": "./out/extension.js",
   "contributes": {
+    "languages": [
+      {
+        "id": "yaml",
+        "filenames": [
+          ".structkit.yaml",
+          ".struct.yaml"
+        ],
+        "filenamePatterns": [
+          "*.structkit.yaml",
+          "*.struct.yaml"
+        ]
+      }
+    ],
+    "yamlValidation": [
+      {
+        "fileMatch": [
+          ".structkit.yaml",
+          "*.structkit.yaml",
+          ".struct.yaml",
+          "*.struct.yaml"
+        ],
+        "url": "./schemas/struct-schema.json"
+      }
+    ],
+    "configurationDefaults": {
+      "files.associations": {
+        ".structkit.yaml": "yaml",
+        "*.structkit.yaml": "yaml",
+        ".struct.yaml": "yaml",
+        "*.struct.yaml": "yaml"
+      }
+    },
     "configuration": {
       "title": "StructKit",
       "properties": {
@@ -82,11 +116,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/httpdss/vscode-struct.git"
+    "url": "git+ssh://git@github.com/httpdss/vscode-structkit.git"
   },
   "bugs": {
-    "url": "https://github.com/httpdss/vscode-struct/issues"
+    "url": "https://github.com/httpdss/vscode-structkit/issues"
   },
-  "homepage": "https://github.com/httpdss/vscode-struct#readme",
+  "homepage": "https://github.com/httpdss/vscode-structkit#readme",
   "license": "MIT"
 }

@@ -1,10 +1,10 @@
 # StructKit for VS Code and Cursor
 
-Companion to [StructKit](https://github.com/httpdss/structkit). Schema validation and autocomplete for `.struct.yaml`. Install the CLI with `pip install structkit`. Star the [core repo](https://github.com/httpdss/structkit).
+Companion to [StructKit](https://github.com/httpdss/structkit). Schema validation and autocomplete for `.structkit.yaml` (legacy `.struct.yaml` is still supported). Install the CLI with `pip install structkit`. Star the [core repo](https://github.com/httpdss/structkit).
 
 ## Features
 
-- **Schema Validation**: Automatic validation of `*.struct.yaml` files using the official StructKit schema
+- **Schema Validation**: Automatic validation of `.structkit.yaml` / `*.structkit.yaml` files (and legacy `.struct.yaml` / `*.struct.yaml`) using the official StructKit schema
 - **Custom Schema Generation**: Generate custom schemas based on your StructKit configurations
 - **Intelligent Autocomplete**: Get suggestions and validation while editing StructKit files
 - **Configurable CLI Path**: Set custom path to your `structkit` command executable
@@ -23,7 +23,7 @@ pip install structkit
 ### Extension Installation
 
 - **From Marketplace** (coming soon): Search for "StructKit" in VS Code/Cursor extensions
-- **From VSIX**: Download the `.vsix` file and install via `code --install-extension structkit-*.vsix`
+- **From VSIX**: Download the `.vsix` file and install via `code --install-extension vscode-structkit-*.vsix`
 
 ## Configuration
 
@@ -51,10 +51,12 @@ This extension contributes the following settings:
 
 ## Usage
 
-1. Create or open a file with the `.struct.yaml` extension
+1. Create or open a file named `.structkit.yaml` (or any `*.structkit.yaml`). Legacy `.struct.yaml` / `*.struct.yaml` files still work.
 2. The extension will automatically apply schema validation
 3. If you have custom structures configured, use the "Generate Custom Schema" command to create enhanced validation
 4. Enjoy intelligent autocomplete and validation while editing your StructKit files
+
+See [`example.structkit.yaml`](example.structkit.yaml) for a sample project file.
 
 ## Requirements
 
@@ -64,9 +66,15 @@ This extension contributes the following settings:
 ## Known Issues
 
 - Custom schema generation requires the `structkit` command to be available in your system
-- Schema validation is currently optimized for `*.struct.yaml` files
+- Schema validation applies to `.structkit.yaml` / `*.structkit.yaml`, with legacy `.struct.yaml` / `*.struct.yaml` still recognized
 
 ## Release Notes
+
+### 0.2.0
+
+- Recognize StructKit's default project file `.structkit.yaml` / `*.structkit.yaml` (introduced in structkit v3.3.0)
+- Continue supporting legacy `.struct.yaml` / `*.struct.yaml`
+- Rename the extension package to `vscode-structkit` (Marketplace ID becomes `kennethbelitzky.vscode-structkit`)
 
 ### 0.1.0
 
