@@ -1,13 +1,13 @@
-# Contributing to VS Code Struct Extension
+# Contributing to the StructKit VS Code Extension
 
-Thank you for your interest in contributing to the VS Code Struct Extension!
+Thank you for your interest in contributing to vscode-structkit!
 
 ## Development Setup
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/httpdss/vscode-struct.git
-   cd vscode-struct
+   git clone https://github.com/httpdss/vscode-structkit.git
+   cd vscode-structkit
    ```
 
 2. **Install dependencies**
@@ -24,7 +24,7 @@ Thank you for your interest in contributing to the VS Code Struct Extension!
    ```bash
    npm run compile
    npx vsce package
-   code --install-extension vscode-struct-*.vsix
+   code --install-extension vscode-structkit-*.vsix
    ```
 
 ## Development Workflow
@@ -106,9 +106,9 @@ If you need to manually update the version:
 
 ## Testing
 
-- Test your changes with real `.struct.yaml` files
+- Test your changes with real `.structkit.yaml` files (legacy `.struct.yaml` should still validate)
 - Verify schema validation works correctly
-- Test both with and without the struct command installed
+- Test both with and without the structkit command installed
 - Check that settings work properly
 
 ## Pull Request Guidelines

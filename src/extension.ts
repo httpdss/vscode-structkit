@@ -17,9 +17,33 @@ import { promisify } from 'util';
 
 const execAsync = promisify(exec);
 
+/** Workspace globs for the default project file and `*.structkit.yaml` variants, plus legacy `.struct.yaml`. */
+export const STRUCTKIT_DOCUMENT_PATTERNS = [
+    '**/.structkit.yaml',
+    '**/*.structkit.yaml',
+    '**/.struct.yaml',
+    '**/*.struct.yaml'
+];
+
+/** Schema association patterns consumed by the YAML language server (`yaml.schemas` / yamlValidation). */
+export const STRUCTKIT_SCHEMA_FILE_MATCH = [
+    '.structkit.yaml',
+    '*.structkit.yaml',
+    '.struct.yaml',
+    '*.struct.yaml'
+];
+
 let schemaProvider: vscode.Disposable | undefined;
 let statusBarItem: vscode.StatusBarItem;
-let documentSelector: vscode.DocumentSelector = { pattern: '**/*.struct.yaml' };
+export const documentSelector: vscode.DocumentSelector = STRUCTKIT_DOCUMENT_PATTERNS.map(pattern => ({ pattern }));
+
+export function isStructKitConfigFile(filePath: string): boolean {
+    const base = path.basename(filePath);
+    return base === '.structkit.yaml'
+        || base === '.struct.yaml'
+        || base.endsWith('.structkit.yaml')
+        || base.endsWith('.struct.yaml');
+}
 
 export function activate(context: vscode.ExtensionContext) {
     console.log('StructKit extension is now active!');
@@ -244,13 +268,13 @@ function updateYamlSchemaAssociation(schemaUri: string) {
     const yamlConfig = vscode.workspace.getConfiguration('yaml');
     const schemas: { [key: string]: string[] } = yamlConfig.get('schemas') || {};
     
-    // Update the schema association for *.struct.yaml files
-    schemas[schemaUri] = ['*.struct.yaml'];
+    // Associate the schema with .structkit.yaml and legacy .struct.yaml files
+    schemas[schemaUri] = [...STRUCTKIT_SCHEMA_FILE_MATCH];
     
     // Set the configuration
     yamlConfig.update('schemas', schemas, vscode.ConfigurationTarget.Workspace);
     
-    console.log(`[DEBUG] Updated YAML schema association:`, { [schemaUri]: ['*.struct.yaml'] });
+    console.log(`[DEBUG] Updated YAML schema association:`, { [schemaUri]: STRUCTKIT_SCHEMA_FILE_MATCH });
 }
 
 export function deactivate() {

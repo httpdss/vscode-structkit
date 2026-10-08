@@ -42,7 +42,7 @@ jobs:
     - name: Upload VSIX artifact
       uses: actions/upload-artifact@v4
       with:
-        name: vscode-struct-${{ matrix.node-version }}
+        name: vscode-structkit-${{ matrix.node-version }}
         path: "*.vsix"
         retention-days: 30
 
@@ -109,7 +109,7 @@ jobs:
     - name: Upload Release Asset
       uses: softprops/action-gh-release@v2
       with:
-        files: ./vscode-struct-${{ steps.extract_version.outputs.version }}.vsix
+        files: ./vscode-structkit-${{ steps.extract_version.outputs.version }}.vsix
         tag_name: ${{ github.event.release.tag_name }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
