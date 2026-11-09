@@ -11,3 +11,9 @@ vsc-extension-quickstart.md
 node_modules/**
 *.vsix
 PLAN.md
+.github/**
+scripts/**
+out/test/**
+eslint.config.js
+CONTRIBUTING.md
+vsce-package.log

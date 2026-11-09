@@ -37,7 +37,13 @@ jobs:
       run: npm run compile
 
     - name: Package extension
-      run: npx vsce package
+      run: |
+        set -o pipefail
+        npx vsce package 2>&1 | tee vsce-package.log
+        if grep -Ei 'warning.*(icon|changelog|repository|license|readme|missing)' vsce-package.log; then
+          echo "::error::vsce package reported missing-field warnings"
+          exit 1
+        fi
       
     - name: Upload VSIX artifact
       uses: actions/upload-artifact@v4
@@ -104,7 +110,7 @@ jobs:
       run: npm ci
 
     - name: Package extension
-      run: npx vsce package
+      run: npx vsce package --out vscode-structkit-${{ steps.extract_version.outputs.version }}.vsix
 
     - name: Upload Release Asset
       uses: softprops/action-gh-release@v2
@@ -114,8 +120,27 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    # Uncomment if you want to publish to VS Code Marketplace
-    # - name: Publish to VS Code Marketplace
-    #   run: npx vsce publish
-    #   env:
-    #     VSCE_PAT: ${{ secrets.VSCE_PAT }}
+    # Marketplace publish uses a PAT (VSCE_PAT). Alternative: Trusted Publishing /
+    # OIDC with vsce 4.1+ (`npx @vscode/vsce publish --oidc`) after creating a
+    # Trusted Publishing policy for this repo and workflow; no PAT required then.
+    - name: Publish to Visual Studio Marketplace
+      env:
+        VSCE_PAT: ${{ secrets.VSCE_PAT }}
+      run: |
+        VSIX="vscode-structkit-${{ steps.extract_version.outputs.version }}.vsix"
+        if [ -z "$VSCE_PAT" ]; then
+          echo "VSCE_PAT is not set; skipping Visual Studio Marketplace publish."
+          exit 0
+        fi
+        npx vsce publish --packagePath "$VSIX"
+
+    - name: Publish to Open VSX
+      env:
+        OVSX_PAT: ${{ secrets.OVSX_PAT }}
+      run: |
+        VSIX="vscode-structkit-${{ steps.extract_version.outputs.version }}.vsix"
+        if [ -z "$OVSX_PAT" ]; then
+          echo "OVSX_PAT is not set; skipping Open VSX publish."
+          exit 0
+        fi
+        npx ovsx publish "$VSIX" -p "$OVSX_PAT"

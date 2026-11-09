@@ -7,10 +7,25 @@
   "engines": {
     "vscode": "^1.74.0"
   },
+  "icon": "images/icon.png",
+  "galleryBanner": {
+    "color": "#43FFA9",
+    "theme": "light"
+  },
   "categories": [
     "Programming Languages",
     "Linters",
     "Formatters"
+  ],
+  "keywords": [
+    "structkit",
+    "yaml",
+    "schema",
+    "validation",
+    "autocomplete",
+    "scaffolding",
+    "project-structure",
+    "cursor"
   ],
   "activationEvents": [
     "onLanguage:yaml",
@@ -116,7 +131,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/httpdss/vscode-structkit.git"
+    "url": "https://github.com/httpdss/vscode-structkit.git"
   },
   "bugs": {
     "url": "https://github.com/httpdss/vscode-structkit/issues"
