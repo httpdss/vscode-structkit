@@ -86,8 +86,11 @@ When you create PRs, use these labels to control version bumping:
 4. **Automatic Build**:
    - GitHub Actions will automatically:
    - Update `package.json` with the release version
-   - Build and package the extension
+   - Build and package the extension once
    - Upload the `.vsix` file to the release
+   - Publish to the Visual Studio Marketplace when `VSCE_PAT` is set
+   - Publish to Open VSX when `OVSX_PAT` is set
+   - Publishing never runs on pull requests; missing tokens skip that marketplace instead of failing the job
 
 ### Manual Version Update (if needed)
 

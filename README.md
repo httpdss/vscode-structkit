@@ -22,8 +22,12 @@ pip install structkit
 
 ### Extension Installation
 
-- **From Marketplace** (coming soon): Search for "StructKit" in VS Code/Cursor extensions
-- **From VSIX**: Download the `.vsix` file and install via `code --install-extension vscode-structkit-*.vsix`
+Extension ID: `kennethbelitzky.vscode-structkit`. Marketplace and Open VSX listing links go live after the first publish.
+
+- **VS Code Marketplace**: search for "StructKit" in the Extensions view, or open [kennethbelitzky.vscode-structkit](https://marketplace.visualstudio.com/items?itemName=kennethbelitzky.vscode-structkit)
+- **Open VSX** (Cursor and other Open VSX clients): search for "StructKit", or open [kennethbelitzky.vscode-structkit](https://open-vsx.org/extension/kennethbelitzky/vscode-structkit)
+- **Command line**: `code --install-extension kennethbelitzky.vscode-structkit` (or `cursor --install-extension kennethbelitzky.vscode-structkit`)
+- **From VSIX**: download the `.vsix` from [GitHub Releases](https://github.com/httpdss/vscode-structkit/releases) and install with `code --install-extension vscode-structkit-*.vsix`
 
 ## Configuration
 
@@ -70,21 +74,7 @@ See [`example.structkit.yaml`](example.structkit.yaml) for a sample project file
 
 ## Release Notes
 
-### 0.2.0
-
-- Recognize StructKit's default project file `.structkit.yaml` / `*.structkit.yaml` (introduced in structkit v3.3.0)
-- Continue supporting legacy `.struct.yaml` / `*.struct.yaml`
-- Rename the extension package to `vscode-structkit` (Marketplace ID becomes `kennethbelitzky.vscode-structkit`)
-
-### 0.1.0
-
-Initial release of the official StructKit extension:
-
-- Schema validation for `*.struct.yaml` files using official StructKit schema
-- Custom schema generation support
-- Configurable structkit command path
-- Custom structures path configuration
-- Support for VS Code and Cursor
+See [CHANGELOG.md](CHANGELOG.md) for version history.
 
 ## Contributing
 
